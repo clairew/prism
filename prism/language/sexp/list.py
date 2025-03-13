@@ -186,7 +186,7 @@ class SexpList(SexpNode):
 
     def pretty_format(  # noqa: D102
             self,
-            max_depth: int = np.PINF,
+            max_depth: int = np.inf,
             depth: int = 0,
             strip: bool = True) -> str:
         formatted = self.pretty_format_recur(self, max_depth, depth)

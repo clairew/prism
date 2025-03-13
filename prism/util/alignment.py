@@ -131,7 +131,7 @@ def lazy_align(
     are very different.
     """
     # DP table
-    D = np.zeros([len(a) + 1, len(b) + 1]) + np.infty
+    D = np.zeros([len(a) + 1, len(b) + 1]) + np.inf
     D[0, 0] = 0
 
     # backtracking table
@@ -151,10 +151,10 @@ def lazy_align(
         # we prefer things closer to the end.
         nc, cx, cy = candidate[0], -candidate[1], -candidate[2]
         costs = (
-            cskip(a[cx]) if cx < len(a) else np.infty,
+            cskip(a[cx]) if cx < len(a) else np.inf,
             calign(a[cx],
-                   b[cy]) if cx < len(a) and cy < len(b) else np.infty,
-            cskip(b[cy]) if cy < len(b) else np.infty)
+                   b[cy]) if cx < len(a) and cy < len(b) else np.inf,
+            cskip(b[cy]) if cy < len(b) else np.inf)
         for c, (x, y) in zip(costs, (cx, cy) + neighbors):
             # bounds check
             if (x > len(a) or y > len(b)):
@@ -221,10 +221,10 @@ def align_factory(
             # we prefer things closer to the end.
             nc, cx, cy = candidate[0], int(-candidate[1]), int(-candidate[2])
             costs = (
-                cskip(a[cx]) if cx < len(a) else np.infty,
+                cskip(a[cx]) if cx < len(a) else np.inf,
                 calign(a[cx],
-                       b[cy]) if cx < len(a) and cy < len(b) else np.infty,
-                cskip(b[cy]) if cy < len(b) else np.infty)
+                       b[cy]) if cx < len(a) and cy < len(b) else np.inf,
+                cskip(b[cy]) if cy < len(b) else np.inf)
             for c, (x, y) in zip(costs, np.array([cx, cy], dtype=np.int32) + neighbors):
                 # bounds check
                 if (x > len(a) or y > len(b)):
@@ -242,7 +242,7 @@ def align_factory(
 
     def align(a, b, return_cost=False):
         # DP table
-        D = np.zeros([len(a) + 1, len(b) + 1]) + np.infty
+        D = np.zeros([len(a) + 1, len(b) + 1]) + np.inf
         D[0, 0] = 0
 
         # backtracking table
